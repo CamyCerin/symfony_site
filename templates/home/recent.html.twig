@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1 class="text-center">Annonce recent</h1>
+    <div class="row">
+        {% for annonce in listAnnonceRecent %}
+            <div class="card mb-2 m-1">
+                <h3 class="card-header">{{ annonce.nom }}</h3>
+                <div class="d-flex justify-content-around">
+                    {% for picture in annonce.listPicture  %}
+                        <img src="{{ asset('upload/') }}{{ picture }}" alt="Image" style="max-width: 200px">
+                    {% endfor %}
+                </div>
+                <div class="card-body">
+                    <p class="card-text">{{ annonce.description }}</p>
+                </div>
+
+                <div class="card-body">
+                    <a href="{{ path('annonce_show', {'id': annonce.id}) }}" class="card-link"><button class="btn btn-primary">Consulter</button></a>
+
+                </div>
+                <div class="card-footer text-muted">
+                    {{ annonce.dateCreation | date("d/m/Y - h:m:s") }}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+
+

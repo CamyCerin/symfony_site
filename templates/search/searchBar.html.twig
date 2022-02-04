@@ -1,0 +1,18 @@
+
+<div>
+    {{ form_start(form) }}
+    <div class="d-flex d-block">
+        <div class="d-flex">
+            {{ form_row(form.type) }}
+            {{ form_row(form.query, {attr: {class: 'form-input', placeholder: 'Recherche'}}) }}
+        </div>
+        <div style="width: 100%;">
+
+            {{ form_row(form.recherche, {attr: {class: 'search_submit'}}) }}
+        </div>
+    </div>
+
+    {{ form_end(form) }}
+</div>
+
+

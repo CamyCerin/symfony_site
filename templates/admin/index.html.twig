@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AdminController!{% endblock %}
+
+{% block body %}
+
+    <button class="btn btn-danger"><a href="{{ path('user_index') }}">Gestion Utilisateur</a></button>
+    <button class="btn btn-danger"><a href="{{ path('annonce_index') }}">Gestion Annonces</a></button>
+    <button class="btn btn-danger"><a href="{{ path('tags_index') }}">Gestion Tags</a></button>
+
+{% endblock %}

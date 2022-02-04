@@ -1,0 +1,82 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Annonce{% endblock %}
+
+{% block body %}
+    <h1 class="text-center">Annonce</h1>
+    <div>
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th>Auteur</th>
+                    <td>{{ annonce.user.username }}</td>
+                </tr>
+                <tr>
+                    <th>Up Vote</th>
+                    <td>{{ annonce.user.upvote }}  <span><a href="{{ path('app_upvote', {'id': annonce.user.id}) }}"><button class="btn-primary btn">+</button></a></span></td>
+                </tr>
+                <tr>
+                    <th>Down Vote</th>
+                    <td>{{ annonce.user.downvote }} <span><a href="{{ path('app_downvote', {'id': annonce.user.id}) }}"><button class="btn-primary btn">-</button></a></span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <hr>
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ annonce.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ annonce.nom }}</td>
+            </tr>
+            <tr>
+                <th>ListPicture</th>
+                <td>
+
+                    {% for picture in annonce.listPicture  %}
+                        <img src="{{ asset('upload/') }}{{ picture }}" alt="Image" style="max-width: 300px">
+                    {% endfor %}
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ annonce.description }}</td>
+            </tr>
+            <tr>
+                <th>Prix</th>
+                <td>{{ annonce.prix }}</td>
+            </tr>
+            <tr>
+                <th>Date_creation</th>
+                <td>{{ annonce.dateCreation ? annonce.dateCreation|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('annonce_index') }}">back to list</a>
+
+    {% if annonce.user == app.user %}
+
+    <a href="{{ path('annonce_edit', {'id': annonce.id}) }}">edit</a>
+        {{ include('annonce/_delete_form.html.twig') }}
+    {% endif %}
+
+    <hr>
+    <h1 class="text-center">Review</h1>
+    {% for review in listReview %}
+        {{ review }}
+    {% else %}
+        <h4>No review</h4>
+    {% endfor %}
+
+    <hr>
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button class="btn">{{ button_label|default('Save') }}</button>
+    {{ form_end(form) }}
+
+{% endblock %}
